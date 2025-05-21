@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إضافة طالب جديد</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2C3E50;
+            --secondary-color: #2980B9;
+            --accent-color: #AED6F1;
+            --light-color: #F4F6F7;
+            --dark-color: #1B2631;
+            --text-color: #333;
+            --border-radius: 10px;
+        }
+        
+        body {
+            font-family: 'Tahoma', Arial, sans-serif;
+            background-color: var(--light-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.2rem 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            width: 100%;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+        }
+        
+        .container-fluid {
+            padding: 0 15px;
+            max-width: 100%;
+        }
+        
+        .content-section {
+            padding: 15px;
+        }
+        
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            margin-bottom: 15px;
+        }
+        
+        .form-section {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .form-section h4 {
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .form-section h4 i {
+            font-size: 1.2rem;
+        }
+        
+        .btn-submit {
+            background-color: var(--secondary-color);
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+        
+        .btn-submit:hover {
+            background-color: #3498db;
+            transform: translateY(-2px);
+        }
+        
+        .btn-back {
+            background-color: #6c757d;
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+        
+        .btn-back:hover {
+            background-color: #5a6268;
+            transform: translateY(-2px);
+        }
+        
+        .form-label {
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+        }
+        
+        .required-field::after {
+            content: " *";
+            color: red;
+        }
+        
+        .is-invalid {
+            border-color: #dc3545;
+        }
+        
+        .invalid-feedback {
+            color: #dc3545;
+            font-size: 0.875em;
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .btn-lg {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .content-section {
+                padding: 10px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .form-label {
+                font-size: 0.9rem;
+            }
+            
+            .form-control, .form-select {
+                padding: 0.5rem;
+                font-size: 0.9rem;
+            }
+            
+            .btn-submit, .btn-back {
+                padding: 8px 15px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- الهيدر -->
+    <div class="header">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <h1 class="mb-0"><i class="fas fa-user-plus me-2"></i>إضافة طالب جديد</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- المحتوى الرئيسي -->
+    <div class="container-fluid content-section">
+        <div class="form-container">
+            <form id="addStudentForm">
+                <!-- المعلومات الشخصية -->
+                <div class="form-section">
+                    <h4><i class="fas fa-user"></i> المعلومات الشخصية</h4>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="fullName" class="form-label required-field">الاسم الرباعي و اللقب</label>
+                            <input type="text" class="form-control" id="fullName" required>
+                            <div class="invalid-feedback">يرجى إدخال الاسم الرباعي</div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="grade" class="form-label required-field">المرحلة الدراسية</label>
+                            <select class="form-select" id="grade" required>
+                                <option value="" selected disabled>اختر المرحلة الدراسية</option>
+                                <option value="الرابع علمي">الرابع علمي</option>
+                                <option value="الخامس علمي">الخامس علمي</option>
+                                <option value="السادس علمي">السادس علمي</option>
+                                <option value="الرابع ادبي">الرابع ادبي</option>
+                                <option value="الخامس ادبي">الخامس ادبي</option>
+                                <option value="السادس ادبي">السادس ادبي</option>
+                            </select>
+                            <div class="invalid-feedback">يرجى اختيار المرحلة الدراسية</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="motherName" class="form-label required-field">اسم الأم الثلاثي</label>
+                            <input type="text" class="form-control" id="motherName" required>
+                            <div class="invalid-feedback">يرجى إدخال اسم الأم</div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="birthInfo" class="form-label required-field">المواليد</label>
+                            <input type="date" class="form-control" id="birthInfo" required>
+                            <div class="invalid-feedback">يرجى إدخال تاريخ الميلاد</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- معلومات ولي الأمر -->
+                <div class="form-section">
+                    <h4><i class="fas fa-user-friends"></i> معلومات ولي الأمر</h4>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="guardianName" class="form-label required-field">اسم ولي الأمر</label>
+                            <input type="text" class="form-control" id="guardianName" required>
+                            <div class="invalid-feedback">يرجى إدخال اسم ولي الأمر</div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="relationship" class="form-label required-field">صلة القرابة</label>
+                            <select class="form-select" id="relationship" required>
+                                <option value="" selected disabled>اختر صلة القرابة</option>
+                                <option value="الأب">الأب</option>
+                                <option value="الأم">الأم</option>
+                                <option value="الاخ">الأخ</option>
+                                <option value="الاخت">الأخت</option>
+                                <option value="العم">العم</option>
+                                <option value="الخال">الخال</option>
+                                <option value="الجد"> الجد </option>
+                                <option value="الزوج">الزوج</option>
+                                <option value="آخر">آخر</option>
+                            </select>
+                            <div class="invalid-feedback">يرجى اختيار صلة القرابة</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="guardianPhone" class="form-label required-field">رقم الهاتف لولي الأمر</label>
+                            <input type="tel" class="form-control" id="guardianPhone" required>
+                            <div class="invalid-feedback">يرجى إدخال رقم هاتف صحيح (10-15 رقم)</div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="guardianEmail" class="form-label">البريد الإلكتروني (اختياري)</label>
+                            <input type="email" class="form-control" id="guardianEmail">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- المعلومات السكنية -->
+                <div class="form-section">
+                    <h4><i class="fas fa-home"></i> المعلومات السكنية</h4>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="address" class="form-label required-field">عنوان السكن</label>
+                            <textarea class="form-control" id="address" rows="2" required></textarea>
+                            <div class="invalid-feedback">يرجى إدخال عنوان السكن</div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="nearestPoint" class="form-label required-field">أقرب نقطة دالة</label>
+                            <input type="text" class="form-control" id="nearestPoint" required>
+                            <div class="invalid-feedback">يرجى إدخال أقرب نقطة دالة</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- المعلومات الوثائقية -->
+                <div class="form-section">
+                    <h4><i class="fas fa-id-card"></i> المعلومات الوثائقية</h4>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="nationalId" class="form-label required-field">رقم البطاقة الوطنية</label>
+                            <input type="text" class="form-control" id="nationalId" required>
+                            <div class="invalid-feedback">يرجى إدخال رقم بطاقة وطنية صحيح</div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="idIssuer" class="form-label required-field">جهة اصدار البطاقة</label>
+                            <input type="text" class="form-control" id="idIssuer" required>
+                            <div class="invalid-feedback">يرجى إدخال جهة الإصدار</div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="idIssueDate" class="form-label required-field">تاريخ الاصدار</label>
+                            <input type="date" class="form-control" id="idIssueDate" required>
+                            <div class="invalid-feedback">يرجى إدخال تاريخ الإصدار</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="residenceCardNumber" class="form-label">رقم بطاقة السكن</label>
+                            <input type="text" class="form-control" id="residenceCardNumber">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="residenceIssuer" class="form-label">جهة الاصدار</label>
+                            <input type="text" class="form-control" id="residenceIssuer">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="residenceIssueDate" class="form-label">تاريخ الاصدار</label>
+                            <input type="date" class="form-control" id="residenceIssueDate">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- أزرار الحفظ -->
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="button" class="btn btn-back" onclick="window.location.href='/'">
+                        <i class="fas fa-arrow-left me-2"></i>العودة للرئيسية
+                    </button>
+                    <div>
+                        <button type="reset" class="btn btn-secondary me-2">
+                            <i class="fas fa-eraser me-2"></i>مسح الحقول
+                        </button>
+                        <button type="submit" class="btn btn-submit">
+                            <i class="fas fa-save me-2"></i>حفظ البيانات
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+<script>
+document.getElementById("addStudentForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+    //mongodb+srv://GIN4869:APTX4869@cluster0.wfgtphb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+
+    const studentData = {
+        fullName: document.getElementById("fullName").value,
+        grade: document.getElementById("grade").value,
+        motherName: document.getElementById("motherName").value,
+        birthInfo: document.getElementById("birthInfo").value,
+        guardianName: document.getElementById("guardianName").value,
+        relationship: document.getElementById("relationship").value,
+        guardianPhone: document.getElementById("guardianPhone").value,
+        guardianEmail: document.getElementById("guardianEmail").value,
+        address: document.getElementById("address").value,
+        nearestPoint: document.getElementById("nearestPoint").value,
+        nationalId: document.getElementById("nationalId").value,
+        idIssuer: document.getElementById("idIssuer").value,
+        idIssueDate: document.getElementById("idIssueDate").value,
+        residenceCardNumber: document.getElementById("residenceCardNumber").value,
+        residenceIssuer: document.getElementById("residenceIssuer").value,
+        residenceIssueDate: document.getElementById("residenceIssueDate").value,
+    };
+
+    try {
+        const response = await fetch("http://localhost:3000/api/students", {
+
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(studentData),
+        });
+
+        if (response.ok) {
+            alert("تم حفظ البيانات بنجاح");
+            document.getElementById("addStudentForm").reset();
+        } else {
+            alert("حدث خطأ أثناء إرسال البيانات");
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        alert("تعذر الاتصال بالخادم");
+    }
+});
+</script>
+</body>
+</html>
